@@ -16,11 +16,11 @@ from datasets import load_dataset
 
 def eval_model(args):
     attack_mode = args.attack_mode
-    wandb.login(key="replace your wandb key")
+    # wandb.login(key="replace your wandb key")  # desactivado: usamos WANDB_MODE=offline
     wandb.init(project=f"unmatch_malicious_{attack_mode}")
 
     device = f"cuda:{args.device}"
-    dataset = load_dataset(args.dataset, num_proc=18)
+    dataset = load_dataset(args.dataset, num_proc=4)
     tokenizer, model, image_processor = load_model_tokenizer(args.model_name, device)
     conv = conversation_multimodal.copy()
     
